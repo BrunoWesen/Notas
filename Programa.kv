@@ -1,0 +1,55 @@
+#:import ku kivy.utils.get_color_from_hex
+
+Manager:
+    Tela1:
+        name: "tela1"
+
+    Tela2:
+        name: "tela2"
+
+    Tela3:
+        name: "tela3"
+
+<Tela1>
+    on_pre_enter: root.adicionarMdCard()
+    FloatLayout:
+        ScrollView:
+            MDBoxLayout:
+                id: caixa
+                spacing: 25
+                padding: 15
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                pos_hint: {"top": 1}
+
+        MDFloatingActionButton:
+            pos_hint: {"x": .7, "y": .05}
+            icon: "plus"
+            on_release: app.root.current = "tela2"
+
+<Tela2>
+    MDFloatLayout:
+        MDTextField:
+            id: texto_anotacao
+            hint_text: "Anotação"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5,"y": .64}
+
+        MDRaisedButton:
+            text: "Salvar"
+            pos_hint: {"center_x": 0.5, "y": .5}
+            on_release: root.apagarTexto()
+            on_release: app.root.current = "tela3"
+
+<Tela3>
+    MDLabel:
+        text: "Anotação salvada com sucesso!"
+        bold: 1
+        halign: 'center'
+        pos_hint: {"y": .2}
+
+    MDRaisedButton:
+        text: "Voltar"
+        pos_hint: {"center_y": .5,"center_x": .5}
+        on_release: app.root.current = "tela1"
